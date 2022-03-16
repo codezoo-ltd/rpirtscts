@@ -153,6 +153,18 @@ void set_rts_cts(int enable) {
 	}
 	
 	enable ? (gpio[gfpsel] |= gpiomask) : (gpio[gfpsel] &= ~gpiomask);
+
+	/* Type1SC Modem Reset by CodeZoo */
+	if(!system("gpio -g mode 26 output"))
+		printf("gpio26 output mode\n");
+	if(!system("gpio -g write 26 0"))
+		printf("Modem Reset.\n");
+	if(!system("sleep 1"))
+		printf("Modem Reset..\n");
+	if(!system("gpio -g write 26 1"))
+		printf("Modem Reset...\n");
+	if(!system("sleep 1"))
+		printf("Modem Ready!!!\n");
 }
 
 void print_usage() {
