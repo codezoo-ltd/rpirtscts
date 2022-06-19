@@ -154,7 +154,15 @@ void set_rts_cts(int enable) {
 	
 	enable ? (gpio[gfpsel] |= gpiomask) : (gpio[gfpsel] &= ~gpiomask);
 
-	/* Type1SC Modem Reset by CodeZoo */
+	/* Type1SC Modem Using Internal Antenna */
+	if(!system("gpio -g mode 5 output"))
+		printf("gpio5 output mode\n");
+	if(!system("gpio -g write 5 0"))	/*if "gpio -g write 5 1" then EXT Antenna ON */
+		printf("EXT ANT OFF.\n");       
+	if(!system("sleep 1"))
+		printf("...\n");
+
+	/* Type1SC Modem Reset */
 	if(!system("gpio -g mode 26 output"))
 		printf("gpio26 output mode\n");
 	if(!system("gpio -g write 26 0"))
