@@ -124,9 +124,9 @@ int rpi_gpio_header_type() {
 
 void set_rts_cts(int enable) {
 	int gfpsel, gpiomask;
-	int fd = open("/dev/mem", O_RDWR|O_SYNC);
+	int fd = open("/dev/gpiomem", O_RDWR|O_SYNC);
 	if (fd < 0) {
-		fprintf(stderr, "can't open /dev/mem (%s)\n", strerror(errno));
+		fprintf(stderr, "can't open /dev/gpiomem (%s)\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	
